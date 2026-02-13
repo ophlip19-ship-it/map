@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP Address Tracker + Live Location (Mapbox)</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.js"></script>
+
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; }
+    #map { flex: 1; min-height: 400px; width: 100%; }
+    .pulse-dot {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-[url(pattern-bg-mobile.png)] bg-no-repeat bg-cover lg:bg-[url(pattern-bg-desktop.png)]  via-indigo-950 to-blue-900 text-white font-sans flex flex-col min-h-screen">
+
+  <div class="container mx-auto px-4 py-6 max-w-5xl flex flex-col flex-grow">
+
+    <h1 class="text-3xl md:text-4xl font-bold text-center mb-6 tracking-tight">
+      IP Address Tracker + Live Location
+    </h1>
+
+    <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl p-6 mb-6">
+      <p class="text-center text-blue-200 mb-4 text-base">
+        Auto-loads your IP location. Search places or use live GPS.
+      </p>
+
+      <div class="flex flex-col gap-4 max-w-3xl mx-auto">
+
+        <!-- IP input + button -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input
+            id="ip-input"
+            type="text"
+            placeholder="Enter any IP address (optional)"
+            class="flex-1 px-5 py-3 rounded-xl bg-white/15 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-base transition"
+          />
+          <button
+            id="track-ip-btn"
+            class="bg-blue-700 hover:bg-blue-600 px-6 py-3 rounded-xl font-semibold text-base transition shadow-lg min-w-[140px]"
+          >
+            Track IP
+          </button>
+        </div>
+
+        <!-- Location search input + button -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input
+            id="place-input"
+            type="text"
+            placeholder="Search city or place (e.g. Port Harcourt, Lagos)"
+            class="flex-1 px-5 py-3 rounded-xl bg-white/15 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-base transition"
+          />
+          <button
+            id="search-place-btn"
+            class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-xl font-semibold text-base transition shadow-lg min-w-[160px]"
+          >
+            Search Location
+          </button>
+        </div>
+
+        <!-- Live location button -->
+        <button
+          id="live-btn"
+          class="bg-green-600 hover:bg-green-500 px-6 py-3 rounded-xl font-semibold text-base transition shadow-lg self-center sm:self-auto min-w-[220px]"
+        >
+          Show Precise Live Location
+        </button>
+
+      </div>
+    </div>
+
+    <div id="result-card" class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl p-6 flex flex-col flex-grow hidden">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 text-center sm:text-left text-sm md:text-base">
+        <div>
+          <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">IP ADDRESS</p>
+          <p id="ip-value" class="font-bold break-all">--</p>
+        </div>
+        <div>
+          <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">CITY / LOCATION</p>
+          <p id="location-value" class="font-bold">--</p>
+        </div>
+        <div>
+          <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">TIMEZONE</p>
+          <p id="timezone-value" class="font-bold">--</p>
+        </div>
+        <div>
+          <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">ISP</p>
+          <p id="isp-value" class="font-bold">--</p>
+        </div>
+      </div>
+
+      <div class="flex-grow relative rounded-xl overflow-hidden border-4 border-white/20 shadow-2xl" id="map-container">
+        <div id="map"></div>
+      </div>
+
+      <p id="live-status" class="text-center mt-3 text-sm text-green-300 hidden">
+        Live precise tracking active • marker updates as you move
+      </p>
+
+    </div>
+
+    <div id="loading" class="text-center py-16 text-xl animate-pulse flex-grow flex items-center justify-center">Detecting your location...</div>
+    <div id="error" class="hidden text-center py-12 text-red-400 text-xl font-medium flex-grow flex items-center justify-center"></div>
+
+  </div>
+
+  <script src="map.js">
+    
+  </script>
+
+</body>
+</html>
