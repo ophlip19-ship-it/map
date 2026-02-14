@@ -53,8 +53,12 @@
           if (ipMarker) ipMarker.remove();
           ipMarker = new mapboxgl.Marker({ color: '#ef4444' })
             .setLngLat([lng, lat])
-            .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(
-              `<strong>IP Location</strong><br>${data.city || '—'}<br>${data.region || ''}, ${data.country_name || ''}<br><small>ISP: ${data.org || '—'}</small>`
+            .setPopup(
+  new mapboxgl.Popup({ offset: 25 }).setHTML(
+    '<div style="color: #22c55e; font-weight: 600;">' +  // green text
+      '<b>IP Location</b><br>' + (data.city || '—') + '<br>' + (data.region || '') + ', ' + (data.country_name || '') + '<br>' +
+      '<small style="color: #86efac;">ISP: ' + (data.org || '—') + '</small>' +  // slightly lighter green for ISP
+'</div>'
             ))
             .addTo(map);
         }
@@ -80,7 +84,7 @@
       errorEl.classList.add('hidden');
 
       try {
-        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(placeName)}.json?access_token=${mapboxgl.accessToken}&limit=1&country=ng`;
+        const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(placeName) + '.json?access_token=' + mapboxgl.accessToken + '&limit=1&country=ng';
         const res = await fetch(url);
         if (!res.ok) throw new Error('Geocoding failed');
 
@@ -98,7 +102,7 @@
         placeMarker = new mapboxgl.Marker({ color: '#f59e0b' }) // orange marker
           .setLngLat([lng, lat])
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(
-            `<strong>${placeNameFormatted}</strong><br>Found via Mapbox Geocoding`
+            '<strong>' + placeNameFormatted + '</strong><br>Found via Mapbox Geocoding'
           ))
           .addTo(map)
           .togglePopup(); // open popup automatically
@@ -140,7 +144,11 @@
           liveMarker = new mapboxgl.Marker({ element: el })
             .setLngLat([lng, lat])
             .setPopup(new mapboxgl.Popup().setHTML(
-              `<strong>Your Live Location</strong><br>Lat: ${lat.toFixed(6)}<br>Lng: ${lng.toFixed(6)}<br>Accuracy: ≈ ${Math.round(acc)} m`
+              '<div style="color: #22c55e; font-weight: 600;">' +
+              'Your Live Location<br>' +
+              'Lat: ' + lat.toFixed(6) + '<br>' +
+              'Lng: ' + lng.toFixed(6) + '<br>' +
+              'Accuracy: ≈ ' + Math.round(acc) + ' m</div>'
             ))
             .addTo(map);
         },
