@@ -24,11 +24,11 @@
     }
   </style>
 </head>
-<body class="bg-[url(pattern-bg-mobile.png)] bg-no-repeat bg-cover lg:bg-[url(pattern-bg-desktop.png)]  via-indigo-950 to-blue-900 text-white font-sans flex flex-col min-h-screen">
+<body class="bg-[#003] text-white font-sans flex flex-col min-h-screen">
 
-  <div class="container mx-auto px-4 py-6 max-w-5xl flex flex-col flex-grow">
-
-    <h1 class="text-3xl md:text-4xl font-bold text-center mb-6 tracking-tight">
+  <div class="  container mx-auto px-0 pt-0 max-w-5xl flex flex-col flex-grow">
+    <div class="top bg-[url(pattern-bg-mobile.png)] bg-no-repeat bg-cover lg:bg-[url(pattern-bg-desktop.png)]">
+          <h1 class="text-3xl md:text-4xl font-bold text-center mb-6 tracking-tight">
       IP Address Tracker + Live Location
     </h1>
 
@@ -82,28 +82,31 @@
       </div>
     </div>
 
+    </div>
+
+
     <div id="result-card" class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl p-6 flex flex-col flex-grow hidden">
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 text-center sm:text-left text-sm md:text-base">
+      <div class="bg-[hsl(214, 69%, 100%)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 text-center sm:text-left text-sm md:text-base">
         <div>
           <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">IP ADDRESS</p>
-          <p id="ip-value" class="font-bold break-all">--</p>
+          <p id="ip-value" class="font-bold break-all text-green-400">--</p>
         </div>
         <div>
           <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">CITY / LOCATION</p>
-          <p id="location-value" class="font-bold">--</p>
+          <p id="location-value" class="font-bold text-green-400">--</p>
         </div>
         <div>
           <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">TIMEZONE</p>
-          <p id="timezone-value" class="font-bold">--</p>
+          <p id="timezone-value" class="font-bold text-green-400">--</p>
         </div>
         <div>
           <p class="text-blue-300 uppercase font-semibold tracking-wide mb-1 text-xs">ISP</p>
-          <p id="isp-value" class="font-bold">--</p>
+          <p id="isp-value" class="font-bold text-green-400">--</p>
         </div>
       </div>
 
-      <div class="flex-grow relative rounded-xl overflow-hidden border-4 border-white/20 shadow-2xl" id="map-container">
+      <div class="flex-grow relative rounded-xl xl:content-box border-4 border-white/20 shadow-2xl" id="map-container">
         <div id="map"></div>
       </div>
 
@@ -118,9 +121,7 @@
 
   </div>
 
-  <script src="map.js">
-    
-  </script>
+  <script src="map.js"></script>
 
 </body>
 </html>
